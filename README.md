@@ -256,13 +256,39 @@ var app = new Vue({
 ```
 >
 ===es6===
+
 this.tasks.filter(function (task){
   return task.completed
 })
+
 ===or===
+
 this.tasks.filter(task => ! task.completed);
 
+## +++++++[ Learning Vue: 008 Components Things ]++++++++
 
+basic concept: to reuse a element: card, nav, button, another button etc.
+[basic structure about component]
+create component called 'task'
+then using it as html tag <task></task>
+
+** html **
+```
+<div id="root">
+  <task>task</task>
+  <task>another task</task>
+</div>
+
+```
+** VUE **
+```
+Vue.component('task', {
+    template: '<li><slot></slot></li>'
+});
+new Vue({
+  el: '#root'
+})
+```
 ## +++++++[ Learning Vue: 00 ]++++++++
 ** html **
 ```
