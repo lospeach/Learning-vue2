@@ -235,6 +235,7 @@ var app = new Vue({
    </ul>
 </div>
 ```
+
 **VUE**
 ```
 var app = new Vue({
@@ -267,7 +268,7 @@ this.tasks.filter(function (task){
 
 this.tasks.filter(task => ! task.completed);
 
-## +++++++[ Learning Vue: 008 Components Things ]++++++++
+## Learning Vue: 008 Components Things 
 
 basic concept: to reuse a element: card, nav, button, another button etc.
 [basic structure about component]
@@ -282,6 +283,7 @@ then using it as html tag <task></task>
 </div>
 
 ```
+
 **VUE**
 ```
 Vue.component('task', {
@@ -374,6 +376,7 @@ Using vue create a components.
     <message title="Hello" body="text in body, YEAH!!!!"></message>
 </div>
 ```
+
 **VUE**
 ```
 Vue.component('message', {
@@ -387,20 +390,7 @@ Vue.component('message', {
         {{ body }}
       </div>
     </article>
-    `,
-
-    data() {
-      return {
-        tasks: [
-          { task: 'Go to the market', complete: true },
-          { task: 'Go to the rastaurent', complete: false },
-          { task: 'Clean a room', complete: true },
-          { task: 'Buy some fruits', complete: false },
-          { task: 'Get up early', complete: true },
-          { task: 'Do abs, legs, arms workout', complete: false }
-        ]
-      };
-    }
+    `
 });
 
 new Vue({
@@ -408,13 +398,13 @@ new Vue({
 })
 ```
 
---note:--
+-- note: --
 first we try to pass title and body props(propoties)
 will get:
 
 >[Vue warn]: Property or method "title" is not defined on the instance but referenced during render. Make sure to declare reactive data properties in the data option.
 
-Which is mean, we need to declare a props to make a component accept by adding:
+we need to declare a props to make a component accept by adding:
 
 ```
 ...
@@ -422,7 +412,115 @@ props: ['title', 'body'],
 ...
 ```
 
-##  Learning Vue: 00 
+##### [ Components exercise vol.1: close BTN ]
+
+--note1.--
+create a close-btn, there are many way eg.
+
+update code below
+
+**html**
+```
+<div id="root">
+<message title="Hi, I am a best one." body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. "></message>
+<message title="Hello" body="text in body, YEAH!!!!"></message>
+</div>
+```
+
+**VUE**
+```
+Vue.component('message', {
+  props: ['title', 'body'],
+
+  data() {
+    return {
+        isVisible: true
+    };
+  },
+
+    template: `
+    <article class="message" v-show="isVisible">
+      <div class="message-header">
+        {{ title }}
+        <button type="button" @click="hideModal">x</button>
+      </div>
+      <div class="message-body">
+        {{ body }}
+      </div>
+    </article>
+    `,
+
+    methods: {
+      hideModal() {
+        this.isVisible = false;
+      }
+    }
+
+});
+
+new Vue({
+  el: '#root'
+})
+```
+
+- using method and and add jquery to do: hide, toggleClass, etc.
+
+```
+...
+method: {
+    hideModal() {
+      $('.message').hide();
+    }
+  }
+...
+```
+
+--or--
+
+- return an obj. in data
+
+```
+...
+data() {
+  return {
+      isVisible: true
+  };
+},
+...
+```
+
+and then use directive => [v-show=""](do not hide an element if true/false )
+
+
+```
+...
+template: `
+<article class="message" v-show="true">
+...
+```
+
+in lesson we gonna bind v-show with "isVisible"
+
+```
+...
+template: `
+<article class="message" v-show="isVisible">
+...
+```
+
+--note2.--
+
+we can reuse v-show="isVisible" anywhere
+
+```
+...
+<button type="button" @click="isVisible = false">x</button>
+...
+```
+
+
+
+## +++++++[ Learning Vue: 00 ]++++++++
 **html**
 ```
 
@@ -432,7 +530,7 @@ props: ['title', 'body'],
 
 ```
 
-##  Learning Vue: 00 
+## +++++++[ Learning Vue: 00 ]++++++++
 **html**
 ```
 
