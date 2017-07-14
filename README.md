@@ -21,7 +21,7 @@ My short note, in lacture Vue.js 2 class
 ```
 
 ## [ Learning Vue: 003 ARRAY ]
-** html **
+**html**
 ```
 <div id="root">
    <ul>
@@ -32,7 +32,7 @@ My short note, in lacture Vue.js 2 class
 </div>
 ```
 
-** VUE **
+**VUE**
 
 ```
 var app = new Vue({
@@ -99,7 +99,7 @@ mounted(){
 
 
 ## +++++++[ Learning Vue: 004 attribute binding]++++++++
-** html **
+**html**
 ```
 var app = new Vue({
   el: '#root',
@@ -108,7 +108,7 @@ var app = new Vue({
   }
 });
 ```
-** VUE **
+**VUE**
 ```
 <div id="root">
    <button v-bind:title="titleObj">Hover Me</button>
@@ -118,12 +118,12 @@ var app = new Vue({
 v-bind:title="titleObj"
 
 **a normal**
-** VUE **
+**VUE**
 ```
 <button v-on:click="methodName" v-bind:title="titleObj">Hover Me</button>
 ```
 **a shorter**
-** VUE **
+**VUE**
 ```
  <button @click="methodName" :title="titleObj">Hover Me</button>
 ```
@@ -131,20 +131,20 @@ v-bind:title="titleObj"
 
 use :class="className" to change a classname
 
-** html **
+**html**
 ```
 <div id="root">
    <h1 :class="className">Yeah, I am yellowing.</h1>
 </div>
 ```
 
-** css **
+**css**
 ```
 .be-yellow{
   color: yellow;
 }
 ```
-** VUE **
+**VUE**
 ```
 var app = new Vue({
   el: '#root',
@@ -157,11 +157,11 @@ var app = new Vue({
 
 ## [ Learning Vue: 006 ]
 
-** html **
+**html**
 ```
 <h1> Hi,  {{ msg.split('').reverse().join('')}} </h1>
 ```
-** VUE **
+**VUE**
 ```
 var app = new Vue({
   el: '#root',
@@ -171,13 +171,14 @@ var app = new Vue({
 });
 ```
 **or**
-** html **
+
+**html**
 ```
 <div id="root">
    <h1> Hi, Turn this {{ msg }} to this {{ reversedMsg }} </h1>
 </div>
 ```
-** VUE **
+**VUE**
 ```
 var app = new Vue({
   el: '#root',
@@ -193,16 +194,15 @@ var app = new Vue({
 });
 ```
 
-
-
 ## [ Learning Vue: 007 Let's make a collection of tasks]
-** html **
+
+**html**
 ```
 <ul>
   <li v-for="task in tasks" v-if="task.completed" v-text="task.description"></li>
 </ul>
 ```
-** VUE **
+**VUE**
 ```
 var app = new Vue({
   el: '#root',
@@ -221,7 +221,7 @@ var app = new Vue({
 
 **or use a computed propoties do filter**
 
-** html **
+**html**
 ```
 <div id="root">
    <h1>Mini Todo list</h1>
@@ -235,7 +235,7 @@ var app = new Vue({
    </ul>
 </div>
 ```
-** VUE **
+**VUE**
 ```
 var app = new Vue({
   el: '#root',
@@ -256,7 +256,7 @@ var app = new Vue({
   }
 });
 ```
->
+
 ===es6===
 
 this.tasks.filter(function (task){
@@ -274,7 +274,7 @@ basic concept: to reuse a element: card, nav, button, another button etc.
 create component called 'task'
 then using it as html tag <task></task>
 
-** html **
+**html**
 ```
 <div id="root">
   <task>task</task>
@@ -282,7 +282,7 @@ then using it as html tag <task></task>
 </div>
 
 ```
-** VUE **
+**VUE**
 ```
 Vue.component('task', {
     template: '<li><slot></slot></li>'
@@ -295,20 +295,20 @@ new Vue({
 
 ### [ Components in Components]
 
-** html **
+**html**
 ```
 <div id="root">
   <task-list></task-list>
 </div>
 ```
 
-** VUE **
+**VUE**
 ```
 Vue.component('task-list', {
     template: `
-    <div>
+    <ul>
       <task v-for="task in tasks">{{ task.task }}</task>
-    </div>
+    </ul>
     `,
 
     data() {
@@ -336,52 +336,127 @@ new Vue({
 
 --Note--
 
-//cannot use root element render multiple element
+cannot use root element render multiple elements
 
 ```<task v-for="task in tasks">{{ task.task }}</task>```
 
-// try this instead
+// try this instead: add ul tag
 
-```<div>
+```<ul>
   <task v-for="task in tasks">{{ task.task }}</task>
-</div>```
+</ul>
+```
+
+#### [ Components exercise vol.1 ]
+
+This exercise is power by BULMA.
+Using vue create a components.
+- add https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.css
+- choose your element: I choose a message components.
+- and then, repeating it by yourself
+
+**html**
+```
+<div id="root">
+  <h3>the old by html</h3>
+  <article class="message">
+    <div class="message-header">
+      <p>Hello World</p>
+      <button class="delete"></button>
+    </div>
+    <div class="message-body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a>        efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+    </div>
+  </article>
+    <hr>
+<h3>the new by vue</h3>
+    <message title="Hi, I am a best one." body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. "></message>
+    <message title="Hello" body="text in body, YEAH!!!!"></message>
+</div>
+```
+**VUE**
+```
+Vue.component('message', {
+  props: ['title', 'body'],
+    template: `
+    <article class="message">
+      <div class="message-header">
+        {{ title }}
+      </div>
+      <div class="message-body">
+        {{ body }}
+      </div>
+    </article>
+    `,
+
+    data() {
+      return {
+        tasks: [
+          { task: 'Go to the market', complete: true },
+          { task: 'Go to the rastaurent', complete: false },
+          { task: 'Clean a room', complete: true },
+          { task: 'Buy some fruits', complete: false },
+          { task: 'Get up early', complete: true },
+          { task: 'Do abs, legs, arms workout', complete: false }
+        ]
+      };
+    }
+});
+
+new Vue({
+  el: '#root'
+})
+```
+
+--note:--
+first we try to pass title and body props(propoties)
+will get:
+
+>[Vue warn]: Property or method "title" is not defined on the instance but referenced during render. Make sure to declare reactive data properties in the data option.
+
+Which is mean, we need to declare a props to make a component accept by adding:
+
+```
+...
+props: ['title', 'body'],
+...
+```
+
+##  Learning Vue: 00 
+**html**
+```
+
+```
+**VUE**
+```
+
+```
+
+##  Learning Vue: 00 
+**html**
+```
+
+```
+**css**
+```
+
+```
+**VUE**
+```
+
+```
 
 
 ## +++++++[ Learning Vue: 00 ]++++++++
-** html **
+**html**
 ```
 
 ```
-** VUE **
+**css**
 ```
 
 ```
-
-## +++++++[ Learning Vue: 00 ]++++++++
-** html **
-```
-
-```
-** css **
-```
-
-```
-** VUE **
-```
-
-```
-
-
-## +++++++[ Learning Vue: 00 ]++++++++
-** html **
-```
-
-```
-** css **
-```
-
-```
-** VUE **
+**VUE**
 ```
 
 ```
