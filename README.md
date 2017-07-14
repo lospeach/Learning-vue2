@@ -1,7 +1,7 @@
 # Learning-vue2
 My short note, in lacture Vue.js 2 class
 
-## +++++++[ Learning Vue ]++++++++
+## [ Learning Vue ]
 ```
    let data ={
      message: 'Hi, I will be a front-end expert!.'
@@ -9,7 +9,7 @@ My short note, in lacture Vue.js 2 class
    document.querySelector('#input1').value = data.message;
 ```
 
-## +++++++[ Learning Vue: 002 ]++++++++
+## [ Learning Vue: 002 ]
 ```
  new Vue({
    el: '#root',
@@ -20,7 +20,7 @@ My short note, in lacture Vue.js 2 class
  })
 ```
 
-## +++++++[ Learning Vue: 003 ARRAY ]++++++++++
+## [ Learning Vue: 003 ARRAY ]
 ** html **
 ```
 <div id="root">
@@ -61,7 +61,9 @@ try a fun tool: adding a VUE extention for chrome or VUE add-on (firefox-dev)
 2. add var app ==
 3. call app then see result
 4. how to [add new ARRAY by] app.names.push('Susan');
+
 #### ====the ES6 way=====
+
 - add id in input and btn
 - use ES6 way
 
@@ -125,7 +127,7 @@ v-bind:title="titleObj"
 ```
  <button @click="methodName" :title="titleObj">Hover Me</button>
 ```
-## +++++++[ Learning Vue: 005 class style]++++++++
+## [ Learning Vue: 005 class style]
 
 use :class="className" to change a classname
 
@@ -153,7 +155,7 @@ var app = new Vue({
 ```
 
 
-## +++++++[ Learning Vue: 006 ]++++++++
+## [ Learning Vue: 006 ]
 
 ** html **
 ```
@@ -193,7 +195,7 @@ var app = new Vue({
 
 
 
-## +++++++[ Learning Vue: 007 Let's make a collection of tasks]++++++++
+## [ Learning Vue: 007 Let's make a collection of tasks]
 ** html **
 ```
 <ul>
@@ -289,6 +291,62 @@ new Vue({
   el: '#root'
 })
 ```
+
+
+### [ Components in Components]
+
+** html **
+```
+<div id="root">
+  <task-list></task-list>
+</div>
+```
+
+** VUE **
+```
+Vue.component('task-list', {
+    template: `
+    <div>
+      <task v-for="task in tasks">{{ task.task }}</task>
+    </div>
+    `,
+
+    data() {
+      return {
+        tasks: [
+          { task: 'Go to the market', complete: true },
+          { task: 'Go to the rastaurent', complete: false },
+          { task: 'Clean a room', complete: true },
+          { task: 'Buy some fruits', complete: false },
+          { task: 'Get up early', complete: true },
+          { task: 'Do abs, legs, arms workout', complete: false }
+        ]
+      };
+    }
+});
+
+Vue.component('task', {
+    template: '<li><slot></slot></li>'
+});
+
+new Vue({
+  el: '#root'
+})
+```
+
+--Note--
+
+//cannot use root element render multiple element
+
+```<task v-for="task in tasks">{{ task.task }}</task>```
+
+// try this instead
+
+```<div>
+  <task v-for="task in tasks">{{ task.task }}</task>
+</div>```
+
+
 ## +++++++[ Learning Vue: 00 ]++++++++
 ** html **
 ```
