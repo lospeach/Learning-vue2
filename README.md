@@ -929,8 +929,9 @@ About Us >>>> #about-us
 
 <a href="#about-us">About Us</a>
 
-
+===========
 more infomation about vue life cycle https://alligator.io/vuejs/component-lifecycle
+===========
 
 
 ## [ Learning Vue: Custom Components: vol.1 ]
@@ -1075,7 +1076,6 @@ Vue.component('coupon',{
   }
 });
 
-
 new Vue({
   el: '#root',
   data: {
@@ -1092,6 +1092,7 @@ new Vue({
 })
 
 ```
+
 
 ## [ Learning Vue: Named Slots in a Nutshell ]
 
@@ -1155,8 +1156,68 @@ new Vue({
 -- Note 2. --
 use a slot tag to make a default content in side html tag
 
+## [ Learning Vue: Single-Use Components and Inline Templates  ]
+**html**
+```
+<div id="root">
+  <progress-view inline-template>
+    <div>
+      <h2>Your progress {{ completionRate }}%</h2>
+      <p>
+        <button @click="completionRate += 10">Update!!!</button>
+      </p>
+    </div>
+  </progress-view>
+</div>
+```
 
-# SOON 
+**VUE**
+```
+Vue.component('progress-view',{
+  data() {
+    return{
+      completionRate: 50
+    }
+  }
+
+});
+
+new Vue({
+  el: '#root',
+})
+
+```
+
+instead using
+```
+...
+  template: `
+
+  `
+...
+```
+
+tellong view everyting between progress-view tag is a template: adding a inline-template attribute
+
+```
+...
+<progress-view inline-template>
+  <h2>Your progress{{completionRate}}</h2>
+</progress-view>
+...
+```
+
+-- Note --
+remember, rendering a template need one sibling or the other word is single root element. Now there are 2 sibling.(h2 tag and p tag)
+inside <progress-view></progress-view>
+
+so, We need to wrap it. (adding div or other tag)
+
+
+
+
+sooon
+
 
 ## [ Learning Vue: 00 ]
 **html**
@@ -1171,6 +1232,9 @@ use a slot tag to make a default content in side html tag
 ```
 
 ```
+
+
+
 
 
 ## [ Learning Vue: 00 ]
